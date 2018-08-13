@@ -1,8 +1,14 @@
 import * as React from "react";
+import { SearchBar } from "./Searchbar";
 
 export class App extends React.Component<IProps, IState> {
     render() {
-        return <h1>Hello, {this.props.name}</h1>;
+        return (
+            <div>
+            <SearchBar />
+            <h1>Hello There, {this.props.name}</h1>
+            </div>
+        )
     }
 }
 
