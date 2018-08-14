@@ -1,19 +1,30 @@
 import * as React from "react";
-import { SearchBar } from "./Searchbar";
+import * as YTSearch from "youtube-api-search";
 
-export class App extends React.Component<IProps, IState> {
+import { SearchBar } from "./Searchbar";
+import { VideoList } from "./Video_list";
+
+const API_KEY = "";
+const initialState = { videos: [] }
+type State = Readonly<typeof initialState>
+
+export class App extends React.Component<object, State> {
+    readonly state: State = initialState
+    constructor(props) {
+        super(props);
+        
+        YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+            this.setState({ videos })
+            console.log(this.state)
+        })
+    }
+
     render() {
         return (
             <div>
             <SearchBar />
-            <h1>Hello There, {this.props.name}</h1>
+            <VideoList videos={this.state.videos} />
             </div>
         )
     }
 }
-
-interface IProps {
-    name: string;
-}
-
-interface IState {}
